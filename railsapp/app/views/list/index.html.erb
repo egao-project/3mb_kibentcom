@@ -1,0 +1,107 @@
+<div class="jumbotron">
+　<div class="container">
+　　<h1>企業と求職者を繋ぐ、イベント参加サイト</h1>
+　　<p>様々な企業が告知しているイベント・説明会に参加しよう！</p>
+　　<p>掲載イベントは随時更新！</p>
+　　<p>&nbsp;</p>
+　　<p>&nbsp;</p>
+　　<p>&nbsp;</p>
+　　<p>&nbsp;</p>
+　</div> <!-- /container -->    
+</div>
+<div class="container">
+    <div class="row"> 
+      <div class="col-lg-9">
+        <div class="row row-top">
+          <div class="col-lg-12 col-top">
+            <h2>新着イベント</h2>
+          </div>
+        </div>
+    <% @events.each do |event| %>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-body pn-row">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <img src="<%=event.img_path%>">
+                  </div>
+                  <div class="col-lg-9">                  
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <a href="#"><h4><%=event.title%></h4></a>
+                      </div>
+                    </div>
+                    <div class="row row-desc">
+                      <div class="col-lg-12">
+                        <%=event.desc%>
+                      </div>
+                    </div>
+                    <div class="row row-start">
+                       <div class="col-lg-12">
+                        開催日：<%=event.start.to_s(:date)%>&nbsp;&nbsp;<%=event.start.to_s(:time)%>〜<%=event.end.to_s(:time)%>
+                      </div>
+                    </div>
+                    <div class="row row-compnay">
+                       <div class="col-lg-12">
+                        <%=event.company.name%>
+                      </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-lg-7 col-map">
+                        <img src="images/iti.png">
+                        <%=event.company.addr%>
+                      </div>
+                       <div class="col-lg-5 col-sanka">
+                        <%=Entrant.where(event_id: event.id).size%>/<%=event.max%>人
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    <% end %>
+      </div>
+      <div class="col-lg-3">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-body pn-fs">
+                <div class="row row-top-fs">
+                  <div class="col-lg-12 col-top">
+                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;facebookの最新情報</h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                  facebook連動を入れる。。
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <br />
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-body pn-fs">
+                <div class="row row-top-tw">
+                  <div class="col-lg-12 col-top">
+                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;twitterの最新情報</h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                  twitter連動を入れる。。
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>

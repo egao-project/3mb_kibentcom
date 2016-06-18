@@ -1,0 +1,111 @@
+<script type="text/javascript">
+function doEntrant(){
+  if(confirm("参加しますか？")){
+    $.ajax({
+       type: "GET",
+       url: '<%= url_for :controller => :list, :action => 'add_entrant' %>',
+       data: "event_id=<%=@event.id%>&company_id=<%=@event.company.id%>",
+       success: function(msg){
+         alert( "参加しました。");
+       }
+     });
+  }
+}
+</script>
+
+<div class="container" id="test">
+    <div class="row"> 
+    	<div class="col-lg-9">
+    		<div class="row row-top">
+	          <div class="col-lg-12 col-top">
+	            <h2><%=@event.title%></h2>
+	          </div>
+    		</div>
+    		<br>
+    		<div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+              	イベントの説明
+              </div>
+              <div class="panel-body">
+              	<%=@event.desc%>
+              </div>
+            </div>
+        	</div>
+       	</div>
+        <br>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                開催者
+              </div>
+              <div class="panel-body">
+                <table class="table table-bordered">
+                  <tr>
+                    <td class="col-sm-2 info">会社名</td>
+                    <td class="col-sm-10"><%=@event.company.name%></td>
+                  </tr>
+                  <tr>
+                    <td class="col-sm-2 info">住所</td>
+                    <td class="col-sm-10"><%=@event.company.addr%></td>
+                  </tr>
+                  <tr>
+                    <td class="col-sm-2 info">会社概要</td>
+                    <td class="col-sm-10"><%=@event.company.desc%></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+    	</div>
+    	<div class="col-lg-3">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default" >
+              <div class="panel-body" style="padding:0px;">
+                <div class="row row-top">
+                  <div class="col-lg-12 col-top">
+                    <h5>開催情報</h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th class="col-sm-12 info">開催日</th>
+                      </tr>
+                      <tr>
+                        <td class="col-sm-12" style="font-size:25px;"><%=@event.start.to_s(:date)%></td>
+                      </tr>
+                      <tr>
+                        <th class="col-sm-12 info">時間</th>
+                      </tr>
+                      <tr>
+                        <td class="col-sm-12" style="font-size:20px;"><%=@event.start.to_s(:time)%>〜<%=@event.end.to_s(:time)%></td>
+                      </tr>
+                      <tr>
+                        <th class="col-sm-12 info">参加人数</th>
+                      </tr>
+                      <tr>
+                        <td class="col-sm-12" style="font-size:30px;">
+                          <%=Entrant.where(event_id: @event.id).size%>/<%=@event.max%>人
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <div class="row" style="padding-bottom:10px;">
+                  <div class="col-sm-12" style="text-align:center;">
+                    <input type="button" class="btn btn-primary" onclick="doEntrant()" value="イベントに参加する">
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+    	</div>
+    </div>
+</div>

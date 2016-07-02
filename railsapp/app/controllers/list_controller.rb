@@ -18,4 +18,9 @@ class ListController < ApplicationController
   	entrant.save
   end
 
+  def create
+    @event = Event.new
+    @event.company_id = 1
+  end
+
 end

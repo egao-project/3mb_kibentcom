@@ -4,12 +4,13 @@ Rails.application.routes.draw do
     member do
       get 'show'
       get 'index'
-      get 'create'
+      get 'new'
+      post 'create'
     end
 
     collection do
       get 'add_entrant'
-      get 'create'
+      post 'create'
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

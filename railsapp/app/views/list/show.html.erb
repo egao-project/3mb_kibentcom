@@ -1,17 +1,49 @@
 <script type="text/javascript">
-function doEntrant(){
-  if(confirm("参加しますか？")){
-    $.ajax({
-       type: "GET",
-       url: '<%= url_for :controller => :list, :action => 'add_entrant' %>',
-       data: "event_id=<%=@event.id%>&company_id=<%=@event.company.id%>",
-       success: function(msg){
-         alert( "参加しました。");
-       }
-     });
-  }
-}
+$(function(){
+
+  $('#addBtn').click(function(){
+    $('#dialog').dialog('open');
+  });
+
+  $("#dialog").dialog({
+    autoOpen: false,
+    modal: true,
+    buttons: {
+      "OK": function(){
+        $(this).dialog('close');
+        $.ajax({
+           type: "GET",
+           url: '<%= url_for :controller => :list, :action => 'add_entrant' %>',
+           data: "event_id=<%=@event.id%>&company_id=<%=@event.company.id%>",
+           success: function(msg){
+            $('#msgdialog').dialog('open');
+           }
+         });
+       },
+       "NO": function(){
+        $(this).dialog('close');
+      }
+    }
+  });
+
+  $("#msgdialog").dialog({
+    autoOpen: false,
+    modal: true,
+    buttons: {
+      "OK": function(){
+        $(this).dialog('close');
+      }
+    }
+  });
+});
 </script>
+<div id="dialog" title="確認" style="display:none">  
+  <p>参加しますか？</p>
+</div>
+
+<div id="msgdialog" title="情報" style="display:none">  
+  <p>参加しました。</p>
+</div>
 
 <div class="container" id="test">
     <div class="row"> 
@@ -91,15 +123,31 @@ function doEntrant(){
                       </tr>
                       <tr>
                         <td class="col-sm-12" style="font-size:30px;">
-                          <%=Entrant.where(event_id: @event.id).size%>/<%=@event.max%>人
+                          <%=Entrant.where(event_id: @event.id).size%>/<%=@event.max%>人                          
                         </td>
                       </tr>
+                      <tr>
+                        <th class="col-sm-12 info">参加予定者</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <% Entrant.where(event_id: @event.id).each do | item | %>
+
+                            <%= item.user.email%><br>
+                          <% end %>
+                        </td>
+                      </tr>
+
                     </table>
                   </div>
                 </div>
                 <div class="row" style="padding-bottom:10px;">
                   <div class="col-sm-12" style="text-align:center;">
-                    <input type="button" class="btn btn-primary" onclick="doEntrant()" value="イベントに参加する">
+                  <% if user_signed_in? %>
+                    <input type="button" class="btn btn-primary" id="addBtn" value="イベントに参加する">
+                  <% else %>
+                    <p>イベントに参加する場合はログインして下さい</p>
+                  <% end %>
                   </div>
                 </div>
               </div>

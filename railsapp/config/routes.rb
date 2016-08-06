@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root :to => 'list#index' 
+
+  devise_for :users
   resources :events
   resources :list do
     member do

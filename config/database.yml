@@ -13,12 +13,12 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: root
-  password: password
 
 development:
   <<: *default
   database: railsapp_development
+  username: root
+  password: password
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -27,6 +27,8 @@ development:
 test:
   <<: *default
   database: railsapp_test
+  username: root
+  password: password
   socket: /tmp/mysql.sock
 
 # As with config/secrets.yml, you never want to store sensitive information,
@@ -51,5 +53,5 @@ test:
 production:
   <<: *default
   database: railsapp_production
-  username: railsapp
-  password: <%= ENV['RAILSAPP_DATABASE_PASSWORD'] %>
+  username: b85f1b6f518dda
+  password: 48bf84e4

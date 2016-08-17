@@ -51,7 +51,9 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: railsapp_production
-  username: b85f1b6f518dda
-  password: 48bf84e4
+  username: mrztkkywglncna
+  password: TfoTjdQLUI-CppblNwaYNjj8qj

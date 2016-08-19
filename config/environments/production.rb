@@ -85,4 +85,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings = {
+  :enable_starttls_auto => false,
+  :address => "smtp.egao-inc.co.jp",
+  :port => 587,
+  :domain => 'smtp.egao-inc.co.jp',
+  :user_name => "ushikit@egao-inc.co.jp", #アドレス
+  :password => "Zaq1_ushikit", #パスワード
+  :authentication => 'plain',
+  }  
 end

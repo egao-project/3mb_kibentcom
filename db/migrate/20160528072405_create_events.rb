@@ -3,6 +3,7 @@ class CreateEvents < ActiveRecord::Migration[5.0]
     create_table :events do |t|
     	t.integer :company_id
     	t.string :title
+      t.string :desc_title
     	t.string :desc
     	t.datetime :start
     	t.datetime :end
@@ -22,6 +23,7 @@ class CreateEvents < ActiveRecord::Migration[5.0]
     create_table :companies do |t|
     	t.string :name
     	t.string :addr
+      t.string :desc
       	t.timestamps
     end 
   end
